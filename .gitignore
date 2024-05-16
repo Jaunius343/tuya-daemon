@@ -1,0 +1,5 @@
+tuya-iot-core-sdk
+obj
+tuya_daemon
+compile_commands.json
+.DEPENDENCIES_INSTALLED
