@@ -1,9 +1,18 @@
 INCLUDE_DIRS = -I $(UTILS_DIR) -I tuya-iot-core-sdk/utils -I tuya-iot-core-sdk/include -I tuya-iot-core-sdk/libraries/coreJSON/source/include -I tuya-iot-core-sdk/interface
-LIB_DIRS = -L tuya-iot-core-sdk/build/lib -llink_core -lmiddleware_implementation -lplatform_port -lutils_modules 
+# LIB_DIRS = -L tuya-iot-core-sdk/build/lib -llink_core -lmiddleware_implementation -lplatform_port -lutils_modules 
 
-# CFLAGS = -Wall -Wextra -std=c11 $(INCLUDE_DIRS)
-CFLAGS = -Wall -std=c11 $(INCLUDE_DIRS)
-LDFLAGS = $(LIB_DIRS)
+# -D_XOPEN_SOURCE=700 is used because compile standard is defined as c11
+# and ocmpiler throws an error for libubox otherwise
+CFLAGS = -Wall -std=c11 $(INCLUDE_DIRS) -D_XOPEN_SOURCE=700
+LDFLAGS = -lblobmsg_json \
+		-lubox \
+		-lubus \
+		-lserialport \
+		-ljson-c \
+		-llink_core \
+		-lmiddleware_implementation \
+		-lplatform_port \
+		-lutils_modules 
 
 LIB_SRC := tuya-iot-core-sdk/build/lib
 LIB_DEST := /usr/local/lib
@@ -66,9 +75,13 @@ clone:
 	git clone https://github.com/tuya/tuya-iot-core-sdk
 
 patch:
-	cp tuya_shared_lib.patch tuya-iot-core-sdk && \
+	cp patches/001-tuya_shared_lib.patch tuya-iot-core-sdk && \
+	cp patches/002-tuya_cmake.patch tuya-iot-core-sdk && \
+	cp patches/003-tuya_user_var.patch tuya-iot-core-sdk && \
 	cd tuya-iot-core-sdk && \
-	patch -p1 -i tuya_shared_lib.patch
+	patch -p1 -i 001-tuya_shared_lib.patch && \
+	patch -p1 -i 002-tuya_cmake.patch && \
+	patch -p1 -i 003-tuya_user_var.patch
 
 build:
 	mkdir -p tuya-iot-core-sdk/build && \

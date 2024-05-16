@@ -1,14 +1,22 @@
-#include "tuyalink_core.h"
-#include "core_json.h"
+#include <tuyalink_core.h>
+#include <json-c/json.h>
+
 #include "argp_parser.h"
 
 #ifndef HELPER_FUNCTIONS_H_INCLUDED
 #define HELPER_FUNCTIONS_H_INCLUDED
 
-long int get_system_uptime();
-void send_uptime(tuya_mqtt_context_t *context);
-int parse_action_code(char *string, char *dest);
-int handle_user_input(struct arguments arguments, char *product_id, size_t p_size, char *device_id,
-		      size_t d_size, char *device_secret, size_t s_size);
+enum PIN_STATUS {
+	PIN_ON,
+	PIN_OFF,
+};
+
+static const char *PIN_STR[] = { "on", "off" };
+
+int parse_action_code(char *string, char *dest, size_t dest_s);
+int check_user_input(struct arguments arguments);
+void handle_pin(tuya_mqtt_context_t *context, struct ubus_context *ctx, const tuyalink_message_t *msg,
+		enum PIN_STATUS key);
+void handle_devices(tuya_mqtt_context_t *context, struct ubus_context *ctx, const tuyalink_message_t *msg);
 
 #endif

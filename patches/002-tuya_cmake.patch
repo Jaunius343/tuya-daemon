@@ -1,0 +1,18 @@
+diff -rupN tuya-iot-core-sdk/CMakeLists.txt tuya-iot-core-sdk-cmake-patch/CMakeLists.txt
+--- tuya-iot-core-sdk/CMakeLists.txt	2024-03-05 08:37:51.545433154 +0200
++++ tuya-iot-core-sdk-cmake-patch/CMakeLists.txt	2024-03-08 08:18:03.489581014 +0200
+@@ -73,6 +73,14 @@ add_subdirectory( src )
+ add_subdirectory( examples )
+ 
+ 
++
++
++install(CODE "MESSAGE(\"Created empty install target.\")")
++
++
++
++
++
+ message(STATUS "------------------------------------------------------------" )
+ message(STATUS "[Link SDK] Configuration summary."                            )
+ message(STATUS "------------------------------------------------------------ ")
