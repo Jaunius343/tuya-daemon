@@ -3,13 +3,6 @@
 #ifndef ARGP_PARSER_H_INCLUDED
 #define ARGP_PARSER_H_INCLUDED
 
-extern const char *argp_program_version;
-extern const char *argp_program_bug_address;
-extern char doc[];
-extern char args_doc[];
-extern struct argp_option options[];
-extern struct argp argp;
-
 /* Used by main to communicate with parse_opt. */
 struct arguments {
 	int silent, verbose, daemon;

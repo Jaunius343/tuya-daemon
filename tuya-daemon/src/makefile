@@ -6,10 +6,9 @@ LIB_DIRS = 	-llink_core \
 			-largp \
 			-lubus \
 			-lubox \
-			-lblobmsg_json \
-			-ljson-c
+			-lblobmsg_json
 
-CFLAGS = -Wall -std=c11 $(INCLUDE_DIRS) -D_XOPEN_SOURCE=700
+CFLAGS = -Wall -std=c11 $(INCLUDE_DIRS)
 LDFLAGS = $(LIB_DIRS)
 
 SRC_DIR := src
@@ -21,7 +20,7 @@ UTILS := $(wildcard $(UTILS_DIR)/*.c)
 OBJS := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 UTIL_OBJS := $(patsubst $(UTILS_DIR)/%.c,$(OBJ_DIR)/%.o,$(UTILS))
 
-EXECUTABLE := tuya-esp
+EXECUTABLE := tuya_daemon
 
 
 

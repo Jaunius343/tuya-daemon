@@ -3,28 +3,6 @@
 
 #include "argp_parser.h"
 
-const char *argp_program_version     = "argp-ex3 1.0";
-const char *argp_program_bug_address = "<bug-gnu-utils@gnu.org>";
-
-/* Program documentation. */
-char doc[] = "Options: ";
-
-/* A description of the arguments we accept. */
-char args_doc[] = "-P product_id  -D device_id  -S device_secret";
-
-/* The options we understand. */
-struct argp_option options[] = { { "verbose", 'v', 0, 0, "Produce verbose output" },
-				 { "quiet", 'q', 0, 0, "Don't produce any output" },
-				 { "silent", 's', 0, OPTION_ALIAS },
-				 { "output", 'o', "FILE", 0, "Output to FILE instead of standard output" },
-				 { "product id", 'P', "ID", 0, "variable for product ID" },
-				 { "device id", 'D', "ID", 0, "variable for device ID" },
-				 { "device secret", 'S', "ID", 0, "variable for device secret" },
-				 { "daemon", 'd', 0, 0, "launch as daemon" },
-				 { 0 } };
-
-struct argp argp = { options, parse_opt, args_doc, doc };
-
 /* Parse a single option. */
 error_t parse_opt(int key, char *arg, struct argp_state *state)
 {
